@@ -75,7 +75,8 @@ window.SITE = {
       title: "LTE Cat.M1 Real-Time Telemetry for Sounding Rockets",
       year: "2023", program: "TAURUS Rocketry Club", status: "", featured: true,
       desc: "Research and development of a real-time communication system for sounding rockets based on " +
-            "LTE Cat.M1. The conformity test results were published in JCCT (2024) as first author.",
+            "LTE Cat.M1. The conformity test results were published in JCCT (2024) as first author, and the team " +
+            "won the Top Excellence Award (2nd place) at the 2023 NURA Rocket Launch Competition.",
       tags: ["LTE Cat.M1", "Telemetry", "Embedded Systems", "Rocketry"],
       links: [["Paper (DOI)", "https://doi.org/10.17703/JCCT.2024.10.4.589"]],
       image: ""
@@ -84,7 +85,8 @@ window.SITE = {
       title: "Multipurpose Sounding Rocket and Mission Payload",
       year: "2023", program: "Creative Design Program (CDP)", status: "", featured: false,
       desc: "Development of a multipurpose sounding rocket and its mission equipment. " +
-            "Won the Gold Prize at the 2023 CDP Competition.",
+            "Won the Gold Prize at the 2023 CDP Competition and, as a follow-up, the Bronze Prize in the preliminary " +
+            "round of the Yeungnam University Consortium Creative Capstone Design Competition.",
       tags: ["Rocketry", "Mission Payload"],
       links: [],
       image: ""
@@ -93,7 +95,8 @@ window.SITE = {
       title: "Generative-AI Multi-Emotion Communication Platform for Socially Vulnerable Groups",
       year: "2023", program: "Social Value Capstone Design", status: "", featured: false,
       desc: "A communication platform that uses generative AI to help socially vulnerable people express and " +
-            "share multiple emotions.",
+            "share multiple emotions. The idea was further developed for the K-Tour Idea Challenge 2023, winning " +
+            "the Grand Prize in the campus round and the Top Excellence Award in the national round.",
       tags: ["Generative AI", "Social Value"],
       links: [],
       image: ""
@@ -150,10 +153,10 @@ window.SITE = {
       by: "President's Award, Korea National University of Transportation",
       scope: "Campus", role: "Team Leader", image: "" },
 
-    { year: 2023, prize: "First Prize", event: "NURA Rocket Launch Competition",
+    { year: 2023, prize: "Top Excellence Award", event: "NURA Rocket Launch Competition",
       by: "President's Award, Korea Aerospace Research Institute (KARI)",
       scope: "National", role: "Control Team Leader", image: "" },
-    { year: 2023, prize: "First Prize", event: "K-Tour Idea Challenge 2023",
+    { year: 2023, prize: "Top Excellence Award", event: "K-Tour Idea Challenge 2023",
       by: "CEO's Award, Korea Tourism Organization",
       scope: "National", role: "Team Leader", image: "" },
     { year: 2023, prize: "Excellence Award", event: "ICT Smart Device-thon",
