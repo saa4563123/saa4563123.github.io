@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Seunghwan Lee</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<section class="pagehead">
+  <div class="wrap">
+    <h1>Projects</h1>
+    <p>Things I have designed and built.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="grid c2" id="project-list"></div>
+  </div>
+</section>
+
+<script src="data/site-data.js?v=1"></script>
+<script src="js/common.js?v=1"></script>
+<script>
+"use strict";
+// 프로젝트 = data/site-data.js 의 projects 목록 (적힌 순서대로)
+const list = window.SITE.projects;
+document.getElementById("project-list").innerHTML = list.length
+  ? list.map(projectCard).join("")
+  : '<p style="color:var(--sub)">Projects coming soon.</p>';
+if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+</script>
+</body>
+</html>

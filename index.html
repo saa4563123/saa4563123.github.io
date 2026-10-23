@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seunghwan Lee — Robotics Researcher</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<meta name="description" content="Seunghwan Lee — M.S. student at the Soft Electronics & Robotics Lab., Korea National University of Transportation. Robot control systems, learning-based legged locomotion, and biomimetic robotics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap split">
+    <div>
+      <h1>Seunghwan Lee<span class="kor">이승환</span></h1>
+      <p class="aff">M.S. Student · Soft Electronics &amp; Robotics Lab. · Korea National University of Transportation</p>
+      <!-- 한두 줄 자기소개 문구 -->
+      <p class="tag">One-line introduction goes here.</p>
+      <div class="cta">
+        <a class="btn" href="research.html">My Research</a>
+        <a class="btn ghost" href="contact.html">Contact</a>
+      </div>
+    </div>
+    <!-- 사진: images/profile.png 를 같은 이름으로 덮어쓰면 교체됩니다 -->
+    <img class="me" src="images/profile.png" alt="Seunghwan Lee" onerror="this.remove()">
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>About Me</h2>
+    <!-- 자기소개 문단 -->
+    <p class="sub">A short paragraph about yourself goes here.</p>
+    <p><a class="more" href="about.html">Education &amp; experience →</a></p>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <h2>Research Interests</h2>
+    <p class="sub">What I study.</p>
+    <div class="grid c3" id="research-cards"></div>
+    <p style="margin-top:22px"><a class="more" href="research.html">Explore my research →</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>Featured Projects</h2>
+    <p class="sub">Things I have designed and built.</p>
+    <div class="grid c3" id="project-cards"></div>
+    <p style="margin-top:22px"><a class="more" href="projects.html">All projects →</a></p>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <h2>Recent Publications</h2>
+    <p class="sub">Selected peer-reviewed work.</p>
+    <div id="recent-pubs"></div>
+    <p><a class="more" href="publications.html">All publications →</a></p>
+  </div>
+</section>
+
+<script src="data/site-data.js?v=1"></script>
+<script src="js/common.js?v=1"></script>
+<script>
+"use strict";
+// 홈 카드 — 모두 data/site-data.js 에서 (연구 분야 앞 3개 · featured 프로젝트 3개 · 최근 논문 3편)
+const S = window.SITE;
+const soon = `<p style="color:var(--sub)">Coming soon.</p>`;
+document.getElementById("research-cards").innerHTML = soon;
+if (S.research.length) document.getElementById("research-cards").innerHTML = S.research.slice(0, 3).map((r, i) => `
+  <a class="card" href="research.html#research-${i + 1}" style="color:inherit;text-decoration:none">
+    ${r.image ? `<img class="fig" src="${encodeURI(r.image)}" alt="${esc(r.title)}" onerror="this.remove()" loading="lazy">` : ""}
+    <h3 class="rt">${esc(r.title)}</h3>
+    <p>${esc(r.desc)}</p>
+  </a>`).join("");
+
+const short = t => t.length > 170 ? t.slice(0, t.lastIndexOf(" ", 165)) + "…" : t;
+const featured = S.projects.map((p, i) => ({ p, i })).filter(x => x.p.featured).slice(0, 3);
+document.getElementById("project-cards").innerHTML = !featured.length ? soon : featured.map(({ p, i }) => `
+  <a class="card mini" href="projects.html#project-${i + 1}" style="color:inherit;text-decoration:none">
+    ${p.image ? `<img class="fig" src="${encodeURI(p.image)}" alt="${esc(p.title)}" onerror="this.remove()" loading="lazy">` : ""}
+    <h3>${esc(p.title)}</h3>
+    <p>${esc(short(p.desc))}</p>
+  </a>`).join("");
+
+document.getElementById("recent-pubs").innerHTML = S.papers.length ? S.papers.slice(0, 3).map(w => `
+  <div class="recent-pub">
+    <div class="t"><a href="${esc(w.link || "publications.html")}"${w.link ? ' target="_blank" rel="noopener"' : ""}
+      style="color:inherit">${esc(w.title)}</a></div>
+    <div class="v">${esc(w.venue)}, ${w.year}</div>
+  </div>`).join("") : soon;
+</script>
+</body>
+</html>

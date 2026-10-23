@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Seunghwan Lee</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<section class="pagehead">
+  <div class="wrap">
+    <h1>Publications</h1>
+    <p>Journal papers, conference papers, and patents.</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <div class="wrap pubw">
+    <div id="pub-list"></div>
+    <div id="pat-list"></div>
+  </div>
+</section>
+
+<script src="data/site-data.js?v=1"></script>
+<script src="js/common.js?v=1"></script>
+<script>
+"use strict";
+// 논문·특허 = data/site-data.js 의 papers / patents (위에 적힌 것이 최신, 번호는 아래에서부터 1)
+const S = window.SITE;
+const total = S.papers.length;
+const byYear = {};
+S.papers.forEach((w, i) => { w._no = total - i; (byYear[w.year || "—"] ??= []).push(w); });
+const years = Object.keys(byYear).sort((a, b) => b - a);
+
+const item = w => `
+  <div class="item">
+    <div class="num">[${w._no}]</div>
+    <div>
+      <div class="title">${w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener">${esc(w.title)}</a>` : esc(w.title)}</div>
+      ${w.titleKo ? `<div class="authors">${esc(w.titleKo)}</div>` : ""}
+      <div class="authors">${boldMe(w.authors)}</div>
+      <div class="venue">${esc(w.venue)}, ${w.year}
+        ${(w.badges || []).map(b => `<span class="bdg man">${esc(b)}</span>`).join("")}</div>
+      ${w.link ? `<div class="quick"><a href="${esc(w.link)}" target="_blank" rel="noopener">Link</a></div>` : ""}
+    </div>
+  </div>`;
+
+document.getElementById("pub-list").innerHTML = total
+  ? years.map(y => `<div class="yearhead"><b>${y}</b></div>${byYear[y].map(item).join("")}`).join("")
+  : '<div class="state">Publications coming soon.</div>';
+
+if (S.patents.length) document.getElementById("pat-list").innerHTML =
+  `<div class="yearhead"><b>Patents</b></div>` +
+  S.patents.map((p, i) => `
+    <div class="pat-item">
+      <div class="num">[${S.patents.length - i}]</div>
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <p>${boldMe(p.inventors || "")}</p>
+        <p>${[p.country, p.number, p.year].filter(Boolean).map(esc).join(" · ")}</p>
+      </div>
+    </div>`).join("");
+</script>
+</body>
+</html>
