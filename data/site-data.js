@@ -35,6 +35,7 @@ window.SITE = {
 
   /* ==========================================================================
      [2] 프로젝트  →  Projects 페이지 + 홈 카드 (featured: true 인 것만 홈에 최대 3개)
+     program: 프로그램·소속 (예: "URP", "Capstone Design") → 연도 옆에 표시
      status: "Ongoing" 이면 초록색으로 표시
      links: [ ["버튼 이름", "주소"], ... ]   (없으면 [])
      image: images/projects/ 에 사진을 올리고 경로를 적는다 (없으면 "")
@@ -50,6 +51,53 @@ window.SITE = {
      },
      ========================================================================== */
   projects: [
+    {
+      title: "Autonomous Long-Range Navigation of a Quadruped Robot with Bioinspired Sensing Pads",
+      year: "2026", program: "Advanced URP", status: "Ongoing", featured: true,
+      desc: "Follow-up to the dog-paw pad project: combining bioinspired foot pads with an array pressure sensor " +
+            "and a GNSS/LTE communication payload to build an unmanned long-range autonomous navigation system " +
+            "for a quadruped robot.",
+      tags: ["Quadruped Robot", "Pressure Sensor Array", "GNSS", "LTE", "Autonomous Navigation"],
+      links: [],
+      image: ""
+    },
+    {
+      title: "Dog-Paw-Inspired Foot Pads for Stable Quadruped Locomotion on Unstructured Terrain",
+      year: "2026", program: "URP", status: "", featured: true,
+      desc: "Research and development of foot pads that mimic the structure of a dog's paw to improve the " +
+            "walking stability of quadruped robots on unstructured terrain. " +
+            "Won the Grand Prize at the 2026 URP Competition (team leader).",
+      tags: ["Biomimetics", "Quadruped Robot", "Foot Pad"],
+      links: [],
+      image: ""
+    },
+    {
+      title: "LTE Cat.M1 Real-Time Telemetry for Sounding Rockets",
+      year: "2023", program: "TAURUS Rocketry Club", status: "", featured: true,
+      desc: "Research and development of a real-time communication system for sounding rockets based on " +
+            "LTE Cat.M1. The conformity test results were published in JCCT (2024) as first author.",
+      tags: ["LTE Cat.M1", "Telemetry", "Embedded Systems", "Rocketry"],
+      links: [["Paper (DOI)", "https://doi.org/10.17703/JCCT.2024.10.4.589"]],
+      image: ""
+    },
+    {
+      title: "Multipurpose Sounding Rocket and Mission Payload",
+      year: "2023", program: "Creative Design Program (CDP)", status: "", featured: false,
+      desc: "Development of a multipurpose sounding rocket and its mission equipment. " +
+            "Won the Gold Prize at the 2023 CDP Competition.",
+      tags: ["Rocketry", "Mission Payload"],
+      links: [],
+      image: ""
+    },
+    {
+      title: "Generative-AI Multi-Emotion Communication Platform for Socially Vulnerable Groups",
+      year: "2023", program: "Social Value Capstone Design", status: "", featured: false,
+      desc: "A communication platform that uses generative AI to help socially vulnerable people express and " +
+            "share multiple emotions.",
+      tags: ["Generative AI", "Social Value"],
+      links: [],
+      image: ""
+    }
   ],
 
   /* ==========================================================================

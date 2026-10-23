@@ -8,7 +8,7 @@
 <meta name="description" content="Seunghwan Lee — B.S.–M.S. combined program student at the Soft Electronics & Robotics Lab., Korea National University of Transportation. Robot control systems, learning-based legged locomotion, and biomimetic robotics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -63,8 +63,8 @@
   </div>
 </section>
 
-<script src="data/site-data.js?v=5"></script>
-<script src="js/common.js?v=5"></script>
+<script src="data/site-data.js?v=6"></script>
+<script src="js/common.js?v=6"></script>
 <script>
 "use strict";
 // 홈 카드 — 모두 data/site-data.js 에서 (연구 분야 앞 3개 · featured 프로젝트 3개 · 최근 논문 3편)
@@ -78,11 +78,13 @@ if (S.research.length) document.getElementById("research-cards").innerHTML = S.r
     <p>${esc(r.desc)}</p>
   </a>`).join("");
 
-const short = t => t.length > 170 ? t.slice(0, t.lastIndexOf(" ", 165)) + "…" : t;
+// 홈 카드에는 설명의 첫 문장만 (너무 길면 단어 단위로 자름)
+const short = t => { const f = t.split(/(?<=\.)\s/)[0]; return f.length > 170 ? f.slice(0, f.lastIndexOf(" ", 165)) + "…" : f; };
 const featured = S.projects.map((p, i) => ({ p, i })).filter(x => x.p.featured).slice(0, 3);
 document.getElementById("project-cards").innerHTML = !featured.length ? soon : featured.map(({ p, i }) => `
-  <a class="card mini" href="projects.html#project-${i + 1}" style="color:inherit;text-decoration:none">
+  <a class="card mini proj" href="projects.html#project-${i + 1}" style="color:inherit;text-decoration:none">
     ${p.image ? `<img class="fig" src="${encodeURI(p.image)}" alt="${esc(p.title)}" onerror="this.remove()" loading="lazy">` : ""}
+    ${[p.year, p.program].filter(Boolean).length ? `<div class="meta">${esc([p.year, p.program].filter(Boolean).join(" · "))}</div>` : ""}
     <h3>${esc(p.title)}</h3>
     <p>${esc(short(p.desc))}</p>
   </a>`).join("");

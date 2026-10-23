@@ -6,7 +6,7 @@
 
 /* 캐시 갱신용 버전 문자열 — JS/CSS 를 고쳤는데 옛 내용이 보이면 숫자를 올리세요.
    (모든 HTML 안의 ?v=1 도 같은 숫자로 함께 올립니다.) */
-const ASSET_V = "?v=5";
+const ASSET_V = "?v=6";
 
 const MENU = [
   ["index.html", "Home"],
@@ -84,7 +84,7 @@ function researchRow(r, i) {
 
 /* ---- 프로젝트 카드 (Projects 페이지·홈) ---- */
 function projectCard(p, i) {
-  const meta = [p.year, p.status].filter(Boolean)
+  const meta = [p.year, p.program, p.status].filter(Boolean)
     .map(m => m === "Ongoing" ? `<span class="on">● Ongoing</span>` : esc(m)).join(" · ");
   const ext = u => /^https?:/.test(u) ? ` target="_blank" rel="noopener"` : "";
   return `
