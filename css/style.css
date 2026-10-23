@@ -327,12 +327,15 @@ footer.site .foot-sub p { margin-top: 6px; }
 
 /* About 수상 목록: 배지(전국/교내, 역할) + 상장 보기 버튼 */
 .prof dd.award-sum span { font-size: 13px; font-weight: 700; color: var(--sub); }
-.prof dd.award-row + dd.award-row { margin-top: 14px; }
-.prof .award-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 5px 0 3px; }
-.prof .award-tags .tag { margin-left: 0; vertical-align: 0; }
+.prof dd.award-row { padding: 12px 0; border-top: 1px solid var(--line); }   /* 상마다 얇은 구분선 */
+.prof dd.award-row + dd.award-row { margin-top: 0; }
+.prof dd.award-row:last-of-type { padding-bottom: 0; }
+.prof .award-tags { margin-left: 4px; white-space: nowrap; }                    /* 배지는 대회 이름 바로 뒤 */
+.prof .award-tags .tag { margin-left: 4px; vertical-align: 1px; }
 .prof .award-tags .tag.nat { background: var(--accent); color: #fff; }          /* 전국대회 */
 .prof .award-tags .tag.lead { background: #fff1cc; color: #8a5a00; }            /* 팀장 */
 .prof .cert {
+  margin-left: 4px; vertical-align: 1px;
   font: inherit; font-size: 11.5px; font-weight: 700; color: var(--sub); cursor: pointer;
   background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 1px 10px 2px;
 }

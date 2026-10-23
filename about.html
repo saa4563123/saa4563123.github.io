@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -82,8 +82,8 @@
   </div>
 </section>
 
-<script src="data/site-data.js?v=4"></script>
-<script src="js/common.js?v=4"></script>
+<script src="data/site-data.js?v=5"></script>
+<script src="js/common.js?v=5"></script>
 <script>
 "use strict";
 // 수상 = data/site-data.js 의 awards (연도 내림차순, 같은 해는 적힌 순서)
@@ -92,12 +92,10 @@ if (A.length) {
   const nat = A.filter(a => a.scope === "National").length;
   const rows = [...A].map((a, i) => ({ a, i })).sort((x, y) => y.a.year - x.a.year || x.i - y.i).map(({ a }) => `
     <dd class="dated award-row"><time>${a.year}</time><div>
-      <b>${esc(a.prize)}</b>, ${esc(a.event)}
-      <div class="award-tags">
-        ${a.scope ? `<span class="tag ${a.scope === "National" ? "nat" : ""}">${esc(a.scope)}</span>` : ""}
-        ${a.role ? `<span class="tag ${/leader/i.test(a.role) ? "lead" : ""}">${esc(a.role)}</span>` : ""}
-        ${a.image ? `<button class="cert" type="button" data-src="${encodeURI(a.image)}" data-cap="${esc(a.prize + ", " + a.event)}">Certificate</button>` : ""}
-      </div>
+      <b>${esc(a.prize)}</b>, ${esc(a.event)}<span class="award-tags">${
+        a.scope ? `<span class="tag ${a.scope === "National" ? "nat" : ""}">${esc(a.scope)}</span>` : ""}${
+        a.role ? `<span class="tag ${/leader/i.test(a.role) ? "lead" : ""}">${esc(a.role)}</span>` : ""}${
+        a.image ? `<button class="cert" type="button" data-src="${encodeURI(a.image)}" data-cap="${esc(a.prize + ", " + a.event)}">Certificate</button>` : ""}</span><br>
       <span>${esc(a.by)}</span></div></dd>`).join("");
   document.getElementById("awards").outerHTML =
     `<dd class="award-sum"><span>${A.length} awards · ${nat} national</span></dd>` + rows;
