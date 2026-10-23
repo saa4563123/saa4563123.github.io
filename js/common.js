@@ -6,7 +6,7 @@
 
 /* 캐시 갱신용 버전 문자열 — JS/CSS 를 고쳤는데 옛 내용이 보이면 숫자를 올리세요.
    (모든 HTML 안의 ?v=1 도 같은 숫자로 함께 올립니다.) */
-const ASSET_V = "?v=1";
+const ASSET_V = "?v=2";
 
 const MENU = [
   ["index.html", "Home"],
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="images/knut-logo-white.png" alt="Korea National University of Transportation"></a>
         <div class="foot-lab">
           <b>Seunghwan Lee</b>
-          <p>M.S. Student · <a href="${L.lab}" target="_blank" rel="noopener">Soft Electronics &amp; Robotics Lab.</a><br>
+          <p>B.S.–M.S. Combined Program Student · <a href="${L.lab}" target="_blank" rel="noopener">Soft Electronics &amp; Robotics Lab.</a><br>
              Korea National University of Transportation, Chungju, Republic of Korea<br>
              <a href="mailto:${L.email}">${L.email}</a> ·
              <a href="${L.github}" target="_blank" rel="noopener">GitHub</a> ·
