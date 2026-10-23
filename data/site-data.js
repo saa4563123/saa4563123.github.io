@@ -70,8 +70,17 @@ window.SITE = {
        badges: ["First Author"]
      },
      ========================================================================== */
-  me: ["Seunghwan Lee", "이승환"],
+  me: ["Seunghwan Lee", "Seung-Hwan Lee", "이승환"],
   papers: [
+    {
+      year: 2024,
+      title: "LTE-Cat.M1 Conformity Test in Sounding Rocket Communication Systems",
+      titleKo: "Sounding Rocket 통신 시스템에서의 LTE-Cat. M1 사용 적합성 시험",
+      authors: "Seung-Hwan Lee, Tae-Hoon Kim, Hyemin Kim, Da Wan Kim",
+      venue: "The Journal of the Convergence on Culture Technology (JCCT), 10(4), 589–594",
+      link: "https://doi.org/10.17703/JCCT.2024.10.4.589",
+      badges: ["KCI", "First Author"]
+    }
   ],
 
   /* ==========================================================================

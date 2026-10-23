@@ -45,7 +45,7 @@ const item = w => `
       <div class="authors">${boldMe(w.authors)}</div>
       <div class="venue">${esc(w.venue)}, ${w.year}
         ${(w.badges || []).map(b => `<span class="bdg man">${esc(b)}</span>`).join("")}</div>
-      ${w.link ? `<div class="quick"><a href="${esc(w.link)}" target="_blank" rel="noopener">Link</a></div>` : ""}
+      ${w.link ? `<div class="quick"><a href="${esc(w.link)}" target="_blank" rel="noopener">${/doi.org/.test(w.link) ? "DOI" : "Link"}</a></div>` : ""}
     </div>
   </div>`;
 
