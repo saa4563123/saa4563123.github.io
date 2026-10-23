@@ -11,6 +11,8 @@ GitHub Pages 정적 사이트입니다. 주소: https://saa4563123.github.io/
 | 프로젝트 추가 | `data/site-data.js` → `projects: [ ]`. `featured: true` 인 것은 홈에도 표시(최대 3개). 사진은 `images/projects/` |
 | 논문 추가 | `data/site-data.js` → `papers: [ ]` 맨 위에 추가 (최신이 위). 내 이름은 `me:` 표기대로 자동 굵게 |
 | 특허 추가 | `data/site-data.js` → `patents: [ ]` (비어 있으면 칸이 숨겨짐) |
+| 수상 추가 | `data/site-data.js` → `awards: [ ]`. 연도별로 자동 정렬, 같은 해에서는 적힌 순서(중요한 상을 위로). `scope`(National/Campus)·`role`(Team Leader 등)은 배지로 표시 |
+| 상장 사진 | `images/awards/` 에 사진을 올리고 그 상의 `image:` 에 경로를 적으면 Certificate 버튼(클릭 시 확대)이 생김 |
 | 홈 소개 문구 | `index.html` → 히어로의 `class="tag"` 한 줄, "About Me" 의 `class="sub"` 문단 |
 | 학력·경력·수상·기술 | `about.html` → `<dd class="dated"><time>기간</time><div>내용</div></dd>` 한 줄이 한 항목 |
 | 연락처 | `contact.html` |

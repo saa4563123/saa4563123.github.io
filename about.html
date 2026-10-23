@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -63,8 +63,9 @@
           <dt>Research Projects</dt>
           <dd><span>To be updated.</span></dd>
 
+          <!-- 수상 목록은 data/site-data.js 의 awards 에서 자동으로 채워집니다 -->
           <dt>Awards &amp; Honors</dt>
-          <dd><span>To be updated.</span></dd>
+          <dd id="awards"><span>To be updated.</span></dd>
 
           <!-- 학회 발표가 생기면 주석을 풀고 채우세요
           <dt>Presentations</dt>
@@ -81,7 +82,40 @@
   </div>
 </section>
 
-<script src="data/site-data.js?v=3"></script>
-<script src="js/common.js?v=3"></script>
+<script src="data/site-data.js?v=4"></script>
+<script src="js/common.js?v=4"></script>
+<script>
+"use strict";
+// 수상 = data/site-data.js 의 awards (연도 내림차순, 같은 해는 적힌 순서)
+const A = window.SITE.awards || [];
+if (A.length) {
+  const nat = A.filter(a => a.scope === "National").length;
+  const rows = [...A].map((a, i) => ({ a, i })).sort((x, y) => y.a.year - x.a.year || x.i - y.i).map(({ a }) => `
+    <dd class="dated award-row"><time>${a.year}</time><div>
+      <b>${esc(a.prize)}</b>, ${esc(a.event)}
+      <div class="award-tags">
+        ${a.scope ? `<span class="tag ${a.scope === "National" ? "nat" : ""}">${esc(a.scope)}</span>` : ""}
+        ${a.role ? `<span class="tag ${/leader/i.test(a.role) ? "lead" : ""}">${esc(a.role)}</span>` : ""}
+        ${a.image ? `<button class="cert" type="button" data-src="${encodeURI(a.image)}" data-cap="${esc(a.prize + ", " + a.event)}">Certificate</button>` : ""}
+      </div>
+      <span>${esc(a.by)}</span></div></dd>`).join("");
+  document.getElementById("awards").outerHTML =
+    `<dd class="award-sum"><span>${A.length} awards · ${nat} national</span></dd>` + rows;
+
+  // 상장 사진 확대 보기 (사진이 있는 항목만)
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.innerHTML = `<button class="x" type="button" aria-label="close">✕</button><img alt=""><div class="cap"></div>`;
+  document.body.append(box);
+  const close = () => box.classList.remove("on");
+  box.addEventListener("click", e => { if (e.target === box || e.target.classList.contains("x")) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  document.querySelectorAll(".cert").forEach(b => b.onclick = () => {
+    box.querySelector("img").src = b.dataset.src;
+    box.querySelector(".cap").textContent = b.dataset.cap;
+    box.classList.add("on");
+  });
+}
+</script>
 </body>
 </html>

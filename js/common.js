@@ -6,7 +6,7 @@
 
 /* 캐시 갱신용 버전 문자열 — JS/CSS 를 고쳤는데 옛 내용이 보이면 숫자를 올리세요.
    (모든 HTML 안의 ?v=1 도 같은 숫자로 함께 올립니다.) */
-const ASSET_V = "?v=3";
+const ASSET_V = "?v=4";
 
 const MENU = [
   ["index.html", "Home"],

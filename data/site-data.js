@@ -82,7 +82,39 @@ window.SITE = {
   ],
 
   /* ==========================================================================
-     [5] 링크  →  푸터에 공통으로 쓰임
+     [5] 수상  →  About 페이지 "Awards & Honors" (연도별로 묶고, 같은 해에서는 적힌 순서대로)
+     중요한 상을 위에 적는다.
+     scope: "National"(전국대회) 또는 "Campus"(교내대회) → 배지로 표시
+     role:  "Team Leader" 처럼 적으면 금색 배지, 그 밖의 역할은 회색 배지
+     image: 상장 사진을 images/awards/ 에 올리고 경로를 적으면 "Certificate" 버튼이 생김 (없으면 "")
+     ========================================================================== */
+  awards: [
+    { year: 2026, prize: "Grand Prize", event: "Undergraduate Research Program (URP) Competition",
+      by: "President's Award, Korea National University of Transportation",
+      scope: "Campus", role: "Team Leader", image: "" },
+
+    { year: 2023, prize: "First Prize", event: "NURA Rocket Launch Competition",
+      by: "President's Award, Korea Aerospace Research Institute (KARI)",
+      scope: "National", role: "Control Team Leader", image: "" },
+    { year: 2023, prize: "First Prize", event: "K-Tour Idea Challenge 2023",
+      by: "CEO's Award, Korea Tourism Organization",
+      scope: "National", role: "Team Leader", image: "" },
+    { year: 2023, prize: "Excellence Award", event: "ICT Smart Device-thon",
+      by: "President's Award, Chungbuk Science & Technology Innovation Agency",
+      scope: "National", role: "Team Member", image: "" },
+    { year: 2023, prize: "Bronze Prize (Preliminary Round)", event: "Yeungnam University Consortium Creative Capstone Design Competition",
+      by: "Director's Award, Center for Innovative Engineering Education, Yeungnam University",
+      scope: "National", role: "Team Member", image: "" },
+    { year: 2023, prize: "Grand Prize", event: "K-Tour Idea Challenge 2023 (Campus Round)",
+      by: "Director's Award, KNUT LINC 3.0 Project Group",
+      scope: "Campus", role: "Team Leader", image: "" },
+    { year: 2023, prize: "Gold Prize", event: "Creative Design Program (CDP) Competition",
+      by: "Director's Award, Center for Innovative Engineering Education, KNUT",
+      scope: "Campus", role: "Team Member", image: "" }
+  ],
+
+  /* ==========================================================================
+     [6] 링크  →  푸터에 공통으로 쓰임
      ========================================================================== */
   links: {
     email: "saa4563123@naver.com",
