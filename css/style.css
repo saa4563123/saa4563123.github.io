@@ -320,3 +320,7 @@ footer.site .foot-sub p { margin-top: 6px; }
 
 /* About 페이지 기술 스택 줄 */
 .prof dd .chip { margin: 0 4px 6px 0; }
+
+/* About 페이지 연구 관심사 키워드 (조금 크게) */
+.prof dd.kw { display: flex; flex-wrap: wrap; gap: 8px; }
+.prof dd.kw .chip { margin: 0; font-size: 13.5px; padding: 5px 14px 6px; color: var(--accent); }
