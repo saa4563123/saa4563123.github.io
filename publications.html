@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -25,32 +25,49 @@
   </div>
 </section>
 
-<script src="data/site-data.js?v=6"></script>
-<script src="js/common.js?v=6"></script>
+<!-- publications.js = 구글 스칼라에서 매일 자동으로 받아 오는 목록 (직접 고치지 않음) -->
+<script src="data/publications.js?v=7"></script>
+<script src="data/site-data.js?v=7"></script>
+<script src="js/common.js?v=7"></script>
 <script>
 "use strict";
-// 논문·특허 = data/site-data.js 의 papers / patents (위에 적힌 것이 최신, 번호는 아래에서부터 1)
+// 논문 = 구글 스칼라 자동 목록 + data/site-data.js 의 papers (합치는 규칙은 js/common.js 의 allPapers)
+// 특허 = data/site-data.js 의 patents. 번호는 오래된 것부터 1
 const S = window.SITE;
-const total = S.papers.length;
+const P = allPapers();
+const total = P.length;
 const byYear = {};
-S.papers.forEach((w, i) => { w._no = total - i; (byYear[w.year || "—"] ??= []).push(w); });
-const years = Object.keys(byYear).sort((a, b) => b - a);
+P.forEach((w, i) => { w._no = total - i; (byYear[w.year || "—"] ??= []).push(w); });
+const years = Object.keys(byYear).sort((a, b) => (+b || 0) - (+a || 0));
 
-const item = w => `
+const ext = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
+const item = w => {
+  const main = w.link || w.scholarUrl;
+  const quick = [
+    w.link && `<a ${ext(w.link)}>${/doi\.org/.test(w.link) ? "DOI" : "Link"}</a>`,
+    w.scholarUrl && `<a ${ext(w.scholarUrl)}>Google Scholar</a>`
+  ].filter(Boolean).join("");
+  const cites = w.cites
+    ? (w.citesUrl ? `<a class="cites" ${ext(w.citesUrl)}>Cited by ${w.cites}</a>` : `<span class="cites">Cited by ${w.cites}</span>`)
+    : "";
+  return `
   <div class="item">
     <div class="num">[${w._no}]</div>
     <div>
-      <div class="title">${w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener">${esc(w.title)}</a>` : esc(w.title)}</div>
+      <div class="title">${main ? `<a ${ext(main)}>${esc(w.title)}</a>` : esc(w.title)}</div>
       ${w.titleKo ? `<div class="authors">${esc(w.titleKo)}</div>` : ""}
       <div class="authors">${boldMe(w.authors)}</div>
-      <div class="venue">${esc(w.venue)}, ${w.year}
-        ${(w.badges || []).map(b => `<span class="bdg man">${esc(b)}</span>`).join("")}</div>
-      ${w.link ? `<div class="quick"><a href="${esc(w.link)}" target="_blank" rel="noopener">${/doi.org/.test(w.link) ? "DOI" : "Link"}</a></div>` : ""}
+      <div class="venue">${[w.venue, w.year].filter(Boolean).map(esc).join(", ")}
+        ${(w.badges || []).map(b => `<span class="bdg man">${esc(b)}</span>`).join("")}${cites}</div>
+      ${quick ? `<div class="quick">${quick}</div>` : ""}
     </div>
   </div>`;
+};
 
+const SC = window.SCHOLAR;
 document.getElementById("pub-list").innerHTML = total
-  ? years.map(y => `<div class="yearhead"><b>${y}</b></div>${byYear[y].map(item).join("")}`).join("")
+  ? years.map(y => `<div class="yearhead"><b>${y}</b></div>${byYear[y].map(item).join("")}`).join("") +
+    (SC ? `<div class="credit">Synced from <a ${ext(SC.profile)}>Google Scholar</a> · last updated ${esc(SC.updated)}</div>` : "")
   : '<div class="state">Publications coming soon.</div>';
 
 if (S.patents.length) document.getElementById("pat-list").innerHTML =

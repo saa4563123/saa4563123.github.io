@@ -104,9 +104,21 @@ window.SITE = {
   ],
 
   /* ==========================================================================
-     [3] 논문  →  Publications 페이지 + 홈 "Recent Publications" (앞의 3편)
-     새 논문은 목록 "맨 위"에 추가 (최신이 위)
-     me: 저자 목록에서 굵게 표시할 내 이름 표기들
+     [3] 논문  →  Publications 페이지 + 홈 "Recent Publications" (최신 3편)
+
+     ★ 논문 목록은 구글 스칼라에서 매일 자동으로 받아 옵니다 (data/publications.js — 직접 고치지 않음).
+       구글 스칼라 프로필에 논문이 올라오면 다음 날 아침 사이트에 저절로 나타납니다.
+       스칼라 주소는 아래 [6] links.scholar 를 씁니다.
+
+     아래 papers 는 "직접 덧붙이거나 고칠 것"만 적습니다:
+       ① 자동 목록의 논문에 배지·국문 제목·영문 제목·DOI 등을 덧붙이거나 고치기
+          → 제목(title 또는 titleKo)이 스칼라 제목과 같거나 link 의 DOI 가 같으면 같은 논문으로 보고,
+            여기 적은 값이 우선합니다. 비워 둔 값("")은 자동 값을 그대로 씁니다.
+       ② 스칼라에 없는 논문 추가 → 그대로 목록에 들어갑니다
+       ③ 자동 목록의 논문 숨기기 → { title: "스칼라에 보이는 제목", hide: true },
+     순서는 상관없습니다 (연도 → 날짜 순으로 자동 정렬).
+
+     me: 저자 목록에서 굵게 표시할 내 이름 표기들 (스칼라의 약어 표기 "SH Lee" 포함)
      link: DOI 주소나 논문 페이지 (없으면 "") · titleKo: 국문 제목 (없으면 "")
      badges: 예) ["SCI", "First Author"]
 
@@ -121,8 +133,9 @@ window.SITE = {
        badges: ["First Author"]
      },
      ========================================================================== */
-  me: ["Seunghwan Lee", "Seung-Hwan Lee", "이승환"],
+  me: ["Seunghwan Lee", "Seung-Hwan Lee", "이승환", "SH Lee"],
   papers: [
+    // 스칼라에는 국문 제목만 있어 영문 제목·영문 저자·DOI·배지를 덧붙임 (titleKo 로 자동 목록과 연결)
     {
       year: 2024,
       title: "LTE-Cat.M1 Conformity Test in Sounding Rocket Communication Systems",

@@ -6,7 +6,7 @@
 
 /* 캐시 갱신용 버전 문자열 — JS/CSS 를 고쳤는데 옛 내용이 보이면 숫자를 올리세요.
    (모든 HTML 안의 ?v=1 도 같은 숫자로 함께 올립니다.) */
-const ASSET_V = "?v=6";
+const ASSET_V = "?v=7";
 
 const MENU = [
   ["index.html", "Home"],
@@ -67,6 +67,38 @@ function boldMe(authors) {
   for (const n of [...window.SITE.me].sort((a, b) => b.length - a.length))
     out = out.replace(new RegExp(`(^|, )(${esc(n).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})(?=,|$)`, "g"), "$1<b>$2</b>");
   return out;
+}
+
+/* ---- 논문 목록 = 구글 스칼라 자동 목록(data/publications.js) + 직접 적은 papers(data/site-data.js) ----
+   · 같은 논문(DOI 가 같거나, 제목·국문 제목이 스칼라 제목과 같음)이면 하나로 합치고 직접 적은 값이 우선
+   · 스칼라에 없는 논문은 직접 적은 그대로 추가 · hide: true 로 적으면 숨김
+   · 결과는 최신이 위 (연도 → 날짜 → 원래 순서) */
+function allPapers() {
+  const key = t => String(t ?? "").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+  const doiOf = u => (String(u ?? "").match(/10\.\d{4,9}\/[^\s?#]+/) || [""])[0].toLowerCase();
+  const sameKey = (a, b) => a === b || (Math.min(a.length, b.length) >= 30 && (a.startsWith(b) || b.startsWith(a)));
+  const same = (auto, mine) => {
+    const d = doiOf(mine.link || mine.doi);
+    if (d && d === doiOf(auto.link || auto.doi)) return true;
+    const mineKeys = [mine.title, mine.titleKo].map(key).filter(Boolean);
+    return [auto.title, auto.scholarTitle].map(key).filter(Boolean)
+      .some(a => mineKeys.some(m => sameKey(a, m)));
+  };
+  const filled = o => Object.fromEntries(Object.entries(o)
+    .filter(([, v]) => v !== "" && v != null && !(Array.isArray(v) && !v.length)));
+
+  const auto = (window.SCHOLAR?.papers || []).map(p => ({ titleKo: "", badges: [], ...p }));
+  const used = new Set(), extra = [];
+  for (const mine of window.SITE.papers || []) {
+    const hit = auto.find(a => !used.has(a) && same(a, mine));
+    if (hit) { used.add(hit); Object.assign(hit, filled(mine)); }
+    else extra.push({ ...mine });
+  }
+  return [...auto, ...extra].filter(p => !p.hide)
+    .map((p, i) => ({ p, i }))
+    .sort((x, y) => (+y.p.year || 0) - (+x.p.year || 0)
+      || String(y.p.date || "").localeCompare(String(x.p.date || "")) || x.i - y.i)
+    .map(x => x.p);
 }
 
 /* ---- 연구 분야 한 줄 (Research 페이지) ---- */
