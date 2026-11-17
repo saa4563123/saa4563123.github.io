@@ -164,12 +164,15 @@ window.SITE = {
                 확인: https://mjl.clarivate.com (Master Journal List, 무료)
               국내 학술지 = "KCI" (KCI 등재학술지)  확인: https://www.kci.go.kr
        rank:  JCR(Journal Citation Reports) 분위가 Q1 일 때만 "JCR Q1" 이라고 적음 → 금색 배지
+              기준: 논문이 나온 때의 최신 JCR, 저널이 여러 카테고리에 있으면 그중 하나라도 Q1 이면 Q1
               확인: 학교 도서관 → Web of Science / JCR (유료). Q1 이 아니면 "" 로 둠
+              같은 학술지라도 해마다 분위가 바뀔 수 있으니, 논문마다 다르면 그 논문에 rank 를 직접 적음
        source: 무엇을 보고 적었는지 메모 (화면에는 안 나옴)
      ========================================================================== */
   journals: [
     { match: "ACS Applied Electronic Materials", index: "SCIE", rank: "",
-      source: "SCIE: ACS 학술지 About 페이지(Web of Science SCIE). JCR 분위는 확인 전" },
+      source: "JCR 2025 (SCIE): Engineering, Electrical & Electronic 104/370 Q2 (JIF 백분위 72.0), " +
+              "Materials Science, Multidisciplinary 184/473 Q2 → Q1 아님. 2026-11-17 JCR 화면에서 확인" },
     { match: "Convergence on Culture Technology", index: "KCI", rank: "",
       source: "KCI 등재학술지 (2019 선정, 2022 재인증) — kci.go.kr SER000004186" }
   ],
