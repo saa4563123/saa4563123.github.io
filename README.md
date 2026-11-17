@@ -10,7 +10,8 @@ GitHub Pages 정적 사이트입니다. 주소: https://saa4563123.github.io/
 | 연구 분야 추가 | `data/site-data.js` → `research: [ ]` (예시가 주석에 있음). 그림은 `images/research/` |
 | 프로젝트 추가 | `data/site-data.js` → `projects: [ ]`. `featured: true` 인 것은 홈에도 표시(최대 3개). 사진은 `images/projects/` |
 | 논문 추가 | **자동** — 구글 스칼라 프로필에 올라오면 다음 날 아침 반영 (아래 "논문 자동 반영") |
-| 논문에 배지·국문 제목 붙이기, 스칼라에 없는 논문 추가, 숨기기 | `data/site-data.js` → `papers: [ ]` (주석에 방법). 내 이름은 `me:` 표기대로 자동 굵게 |
+| 논문에 국문 제목·DOI 붙이기, 스칼라에 없는 논문 추가, 숨기기 | `data/site-data.js` → `papers: [ ]` (주석에 방법). 내 이름은 `me:` 표기대로 자동 굵게 |
+| 논문 배지 (SCIE·KCI, JCR Q1, First Author·Co-author) | 자동. 새 학술지에 실리면 `data/site-data.js` → `journals: [ ]` 에 한 줄 추가 (기준: Web of Science·KCI 등재, JCR 분위) |
 | 특허 추가 | `data/site-data.js` → `patents: [ ]` (비어 있으면 칸이 숨겨짐) |
 | 수상 추가 | `data/site-data.js` → `awards: [ ]`. 연도별로 자동 정렬, 같은 해에서는 적힌 순서(중요한 상을 위로). `scope`(National/Campus)·`role`(Team Leader 등)은 배지로 표시 |
 | 상장 사진 | `images/awards/` 에 사진을 올리고 그 상의 `image:` 에 경로를 적으면 Certificate 버튼(클릭 시 확대)이 생김 |

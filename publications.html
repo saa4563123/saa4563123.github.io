@@ -58,7 +58,7 @@ const item = w => {
       ${w.titleKo ? `<div class="authors">${esc(w.titleKo)}</div>` : ""}
       <div class="authors">${boldMe(w.authors)}</div>
       <div class="venue">${[w.venue, w.year].filter(Boolean).map(esc).join(", ")}
-        ${(w.badges || []).map(b => `<span class="bdg man">${esc(b)}</span>`).join("")}${cites}</div>
+        ${paperBadges(w)}${cites}</div>
       ${quick ? `<div class="quick">${quick}</div>` : ""}
     </div>
   </div>`;

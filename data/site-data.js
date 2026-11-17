@@ -120,7 +120,13 @@ window.SITE = {
 
      me: 저자 목록에서 굵게 표시할 내 이름 표기들 (스칼라의 약어 표기 "SH Lee" 포함)
      link: DOI 주소나 논문 페이지 (없으면 "") · titleKo: 국문 제목 (없으면 "")
-     badges: 예) ["SCI", "First Author"]
+
+     배지는 자동으로 붙습니다 (적지 않아도 됨):
+       · SCIE / KCI, 상위 저널(JCR Q1 등) → 아래 [3-1] journals 표에서 학술지 이름으로 찾음
+       · First Author / Co-author → 저자 목록에서 me 이름의 위치로 판단
+     자동 판단을 바꾸고 싶을 때만 논문에 적습니다:
+       role: "Co-first Author" / "Corresponding Author" 처럼 적으면 저자 배지를 그 글자로 바꿈
+       badges: 그 밖에 덧붙일 배지, 예) ["Cover Article"]
 
      예시:
      {
@@ -130,12 +136,12 @@ window.SITE = {
        authors: "Seunghwan Lee, Co Author, Da Wan Kim",
        venue: "Journal Name, 1(1), 1–10",
        link: "https://doi.org/...",
-       badges: ["First Author"]
+       badges: []
      },
      ========================================================================== */
   me: ["Seunghwan Lee", "Seung-Hwan Lee", "이승환", "SH Lee"],
   papers: [
-    // 스칼라에는 국문 제목만 있어 영문 제목·영문 저자·DOI·배지를 덧붙임 (titleKo 로 자동 목록과 연결)
+    // 스칼라에는 국문 제목만 있어 영문 제목·영문 저자·DOI 를 덧붙임 (titleKo 로 자동 목록과 연결)
     {
       year: 2024,
       title: "LTE-Cat.M1 Conformity Test in Sounding Rocket Communication Systems",
@@ -143,8 +149,29 @@ window.SITE = {
       authors: "Seung-Hwan Lee, Tae-Hoon Kim, Hyemin Kim, Da Wan Kim",
       venue: "The Journal of the Convergence on Culture Technology (JCCT), 10(4), 589–594",
       link: "https://doi.org/10.17703/JCCT.2024.10.4.589",
-      badges: ["KCI", "First Author"]
+      badges: []
     }
+  ],
+
+  /* ==========================================================================
+     [3-1] 학술지 표  →  논문 배지 (SCIE·KCI, 상위 저널)
+     논문의 학술지 이름(venue)에 match 글자가 들어 있으면 그 학술지의 배지가 붙습니다
+     (대소문자·기호 무시). 스칼라에서 자동으로 들어온 논문에도 똑같이 적용됩니다.
+     새 학술지에 논문이 실리면 여기에 한 줄만 추가하세요.
+
+     기준은 하나로 통일합니다 — 다른 지표(SJR·Scopus 분위, 집계 사이트 수치)는 쓰지 않습니다.
+       index: 국제 학술지 = Clarivate Web of Science 등재 색인 ("SCIE" 등)
+                확인: https://mjl.clarivate.com (Master Journal List, 무료)
+              국내 학술지 = "KCI" (KCI 등재학술지)  확인: https://www.kci.go.kr
+       rank:  JCR(Journal Citation Reports) 분위가 Q1 일 때만 "JCR Q1" 이라고 적음 → 금색 배지
+              확인: 학교 도서관 → Web of Science / JCR (유료). Q1 이 아니면 "" 로 둠
+       source: 무엇을 보고 적었는지 메모 (화면에는 안 나옴)
+     ========================================================================== */
+  journals: [
+    { match: "ACS Applied Electronic Materials", index: "SCIE", rank: "",
+      source: "SCIE: ACS 학술지 About 페이지(Web of Science SCIE). JCR 분위는 확인 전" },
+    { match: "Convergence on Culture Technology", index: "KCI", rank: "",
+      source: "KCI 등재학술지 (2019 선정, 2022 재인증) — kci.go.kr SER000004186" }
   ],
 
   /* ==========================================================================

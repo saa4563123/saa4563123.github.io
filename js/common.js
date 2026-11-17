@@ -73,8 +73,11 @@ function boldMe(authors) {
    · 같은 논문(DOI 가 같거나, 제목·국문 제목이 스칼라 제목과 같음)이면 하나로 합치고 직접 적은 값이 우선
    · 스칼라에 없는 논문은 직접 적은 그대로 추가 · hide: true 로 적으면 숨김
    · 결과는 최신이 위 (연도 → 날짜 → 원래 순서) */
+/* 비교용 글자: 대소문자·기호·공백 무시 ("Seung-Hwan Lee" = "seunghwan lee") */
+const textKey = t => String(t ?? "").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+
 function allPapers() {
-  const key = t => String(t ?? "").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+  const key = textKey;
   const doiOf = u => (String(u ?? "").match(/10\.\d{4,9}\/[^\s?#]+/) || [""])[0].toLowerCase();
   const sameKey = (a, b) => a === b || (Math.min(a.length, b.length) >= 30 && (a.startsWith(b) || b.startsWith(a)));
   const same = (auto, mine) => {
@@ -99,6 +102,27 @@ function allPapers() {
     .sort((x, y) => (+y.p.year || 0) - (+x.p.year || 0)
       || String(y.p.date || "").localeCompare(String(x.p.date || "")) || x.i - y.i)
     .map(x => x.p);
+}
+
+/* ---- 논문 배지: 색인(SCIE·KCI) → 상위 저널(Q1 등) → 저자 순서(주저자·공저자) → 그 밖의 badges ----
+   · 색인·상위 저널: data/site-data.js 의 journals 에서 학술지 이름(venue)으로 찾음
+   · 저자 순서: 저자 목록에서 내 이름(SITE.me)이 맨 앞이면 First Author, 그 밖의 자리면 Co-author
+   · 논문마다 index / rank / role 을 직접 적으면 그 값이 우선 (예: role: "Co-first Author") */
+function paperBadges(w) {
+  const venue = textKey(w.venue);
+  const j = (window.SITE.journals || []).find(j => textKey(j.match) && venue.includes(textKey(j.match))) || {};
+  const me = new Set((window.SITE.me || []).map(textKey));
+  const pos = String(w.authors ?? "").split(/\s*[,，]\s*/).findIndex(a => me.has(textKey(a)));
+  const role = w.role || (pos === 0 ? "First Author" : pos > 0 ? "Co-author" : "");
+  const index = w.index || j.index, rank = w.rank || j.rank;
+  const seen = new Set();
+  return [
+    index && [index, /kci/i.test(index) ? "kci" : "sci"],
+    rank && [rank, "top"],
+    role && [role, /first/i.test(role) ? "first" : "co"],
+    ...(w.badges || []).map(b => [b, "man"])
+  ].filter(b => b && !seen.has(b[0].toLowerCase()) && seen.add(b[0].toLowerCase()))
+    .map(([t, c]) => `<span class="bdg ${c}">${esc(t)}</span>`).join("");
 }
 
 /* ---- 연구 분야 한 줄 (Research 페이지) ---- */

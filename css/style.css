@@ -208,8 +208,15 @@ img { max-width: 100%; }
   padding: 2px 8px; border-radius: 99px; color: #fff; white-space: nowrap;
 }
 .pubw .bdg.if { background: #c0392b; }
-.pubw .bdg.top { background: #b8860b; }
-.pubw .bdg.man { background: #34495e; }
+.pubw .bdg.top { background: #8f6400; }      /* 상위 저널 (JCR Q1) — 금색, 흰 글자가 읽히도록 어둡게 */
+.pubw .bdg.man { background: #34495e; }      /* 그 밖에 직접 적은 배지 */
+/* 논문 배지 (js/common.js 의 paperBadges): 색인 → 상위 저널 → 저자 순서 */
+.pubw .bdg.sci { background: var(--accent); }                  /* SCIE 등 Web of Science 색인 */
+.pubw .bdg.kci { background: #0b7a5f; }                        /* KCI 등재 */
+.pubw .bdg.first { background: var(--navy); }                 /* 주저자 */
+.pubw .bdg.co {                                                /* 공저자 — 테두리만 */
+  background: #fff; color: var(--sub); border: 1px solid #cfd6e0; padding: 1px 7px;
+}
 /* 특허 항목 줄 안의 뱃지는 앞 내용과 살짝 띄운다 */
 .pubw .pat-item p .bdg { margin-left: 8px; vertical-align: 1px; }
 .pubw .cites { color: #8a93a2; font-size: 12px; font-style: normal; font-weight: 400; }
